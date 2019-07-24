@@ -46,14 +46,15 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.StudentDataGridView = new System.Windows.Forms.DataGridView();
-            this.studentTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.sectionCDatabaseDataSet = new COMP123_S2019_Lesson11C.SectionCDatabaseDataSet();
-            this.studentTableTableAdapter = new COMP123_S2019_Lesson11C.SectionCDatabaseDataSetTableAdapters.StudentTableTableAdapter();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.studentIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.firstNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lastNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ShowDataButton = new System.Windows.Forms.Button();
+            this.studentTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.sectionCDatabaseDataSet = new COMP123_S2019_Lesson11C.SectionCDatabaseDataSet();
+            this.studentTableTableAdapter = new COMP123_S2019_Lesson11C.SectionCDatabaseDataSetTableAdapters.StudentTableTableAdapter();
+            this.NextButton = new System.Windows.Forms.Button();
+            this.SelectionLabel = new System.Windows.Forms.Label();
             this.MainMenuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.StudentDataGridView)).BeginInit();
@@ -107,6 +108,7 @@
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(173, 26);
             this.saveToolStripMenuItem.Text = "&Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -167,6 +169,7 @@
             this.saveToolStripButton.Name = "saveToolStripButton";
             this.saveToolStripButton.Size = new System.Drawing.Size(24, 24);
             this.saveToolStripButton.Text = "&Save";
+            this.saveToolStripButton.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -190,6 +193,10 @@
             // 
             // StudentDataGridView
             // 
+            this.StudentDataGridView.AllowUserToAddRows = false;
+            this.StudentDataGridView.AllowUserToDeleteRows = false;
+            this.StudentDataGridView.AllowUserToResizeColumns = false;
+            this.StudentDataGridView.AllowUserToResizeRows = false;
             this.StudentDataGridView.AutoGenerateColumns = false;
             this.StudentDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.StudentDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
@@ -202,23 +209,12 @@
             this.StudentDataGridView.DataSource = this.studentTableBindingSource;
             this.StudentDataGridView.Location = new System.Drawing.Point(13, 72);
             this.StudentDataGridView.Name = "StudentDataGridView";
+            this.StudentDataGridView.ReadOnly = true;
             this.StudentDataGridView.RowTemplate.Height = 24;
+            this.StudentDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.StudentDataGridView.Size = new System.Drawing.Size(757, 213);
             this.StudentDataGridView.TabIndex = 2;
-            // 
-            // studentTableBindingSource
-            // 
-            this.studentTableBindingSource.DataMember = "StudentTable";
-            this.studentTableBindingSource.DataSource = this.sectionCDatabaseDataSet;
-            // 
-            // sectionCDatabaseDataSet
-            // 
-            this.sectionCDatabaseDataSet.DataSetName = "SectionCDatabaseDataSet";
-            this.sectionCDatabaseDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // studentTableTableAdapter
-            // 
-            this.studentTableTableAdapter.ClearBeforeFill = true;
+            this.StudentDataGridView.SelectionChanged += new System.EventHandler(this.StudentDataGridView_SelectionChanged);
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -234,6 +230,7 @@
             this.studentIDDataGridViewTextBoxColumn.FillWeight = 99.49239F;
             this.studentIDDataGridViewTextBoxColumn.HeaderText = "StudentID";
             this.studentIDDataGridViewTextBoxColumn.Name = "studentIDDataGridViewTextBoxColumn";
+            this.studentIDDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // firstNameDataGridViewTextBoxColumn
             // 
@@ -241,6 +238,7 @@
             this.firstNameDataGridViewTextBoxColumn.FillWeight = 99.49239F;
             this.firstNameDataGridViewTextBoxColumn.HeaderText = "FirstName";
             this.firstNameDataGridViewTextBoxColumn.Name = "firstNameDataGridViewTextBoxColumn";
+            this.firstNameDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // lastNameDataGridViewTextBoxColumn
             // 
@@ -248,23 +246,49 @@
             this.lastNameDataGridViewTextBoxColumn.FillWeight = 99.49239F;
             this.lastNameDataGridViewTextBoxColumn.HeaderText = "LastName";
             this.lastNameDataGridViewTextBoxColumn.Name = "lastNameDataGridViewTextBoxColumn";
+            this.lastNameDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // ShowDataButton
+            // studentTableBindingSource
             // 
-            this.ShowDataButton.Location = new System.Drawing.Point(558, 453);
-            this.ShowDataButton.Name = "ShowDataButton";
-            this.ShowDataButton.Size = new System.Drawing.Size(212, 78);
-            this.ShowDataButton.TabIndex = 3;
-            this.ShowDataButton.Text = "Show Data";
-            this.ShowDataButton.UseVisualStyleBackColor = true;
-            this.ShowDataButton.Click += new System.EventHandler(this.ShowDataButton_Click);
+            this.studentTableBindingSource.DataMember = "StudentTable";
+            this.studentTableBindingSource.DataSource = this.sectionCDatabaseDataSet;
+            // 
+            // sectionCDatabaseDataSet
+            // 
+            this.sectionCDatabaseDataSet.DataSetName = "SectionCDatabaseDataSet";
+            this.sectionCDatabaseDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // studentTableTableAdapter
+            // 
+            this.studentTableTableAdapter.ClearBeforeFill = true;
+            // 
+            // NextButton
+            // 
+            this.NextButton.Location = new System.Drawing.Point(558, 453);
+            this.NextButton.Name = "NextButton";
+            this.NextButton.Size = new System.Drawing.Size(212, 78);
+            this.NextButton.TabIndex = 3;
+            this.NextButton.Text = "Next";
+            this.NextButton.UseVisualStyleBackColor = true;
+            this.NextButton.Click += new System.EventHandler(this.NextButton_Click);
+            // 
+            // SelectionLabel
+            // 
+            this.SelectionLabel.BackColor = System.Drawing.Color.White;
+            this.SelectionLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SelectionLabel.Location = new System.Drawing.Point(33, 317);
+            this.SelectionLabel.Name = "SelectionLabel";
+            this.SelectionLabel.Size = new System.Drawing.Size(717, 49);
+            this.SelectionLabel.TabIndex = 4;
+            this.SelectionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(19F, 38F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(782, 553);
-            this.Controls.Add(this.ShowDataButton);
+            this.Controls.Add(this.SelectionLabel);
+            this.Controls.Add(this.NextButton);
             this.Controls.Add(this.StudentDataGridView);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.MainMenuStrip);
@@ -314,7 +338,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn studentIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn firstNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn lastNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.Button ShowDataButton;
+        private System.Windows.Forms.Button NextButton;
+        private System.Windows.Forms.Label SelectionLabel;
     }
 }
 
